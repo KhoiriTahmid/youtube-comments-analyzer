@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+pandas
+numpy
+regex
+emoji
+git+https://github.com/ariaghora/mpstemmer.git
+python-Levenshtein
+tensorflow
+scikit-learn
+youtube-comment-downloader
+nest_asyncio
+pyngrok
+emoji
+nltk
