@@ -1,13 +1,11 @@
 from fastapi import FastAPI, BackgroundTasks
 import nltk
 nltk.download('punkt_tab')
-from youtube_comment_downloader import *
 
 from services import add_lexicon
 from db_services import db_connect, db_disconnect
 from preprocess import add_slangwords
 from controller import get_comments_and_process
-from ngrok import run_ngrok
 
 # Inisialisasi FastAPI App
 app = FastAPI(
