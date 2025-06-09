@@ -1,9 +1,9 @@
+from nltk.tokenize import word_tokenize
 from mpstemmer import MPStemmer
+import  csv
+import unicodedata
 import emoji
 import re
-import unicodedata
-from nltk.tokenize import word_tokenize
-
 
 
 # --- Fungsi dan Logika Pra-pemrosesan (Tidak ada perubahan dari kode sebelumnya) ---
@@ -29,6 +29,15 @@ judol_phrase = {
     "toto", "sekater", "miya88", "maxwin", "alexis17", "weton88", "jadwal303", "victory88", "tujuh tujuh",
     "withdraw", "mekswin", "makswin", "j200m", "xuxu4d", "dewadora", "aero88", "asia99", "alexis", "lexis",
 }
+
+def add_slangwords():
+    try:
+        with open("csv/colloquial-indonesian-lexicon.csv", newline='', encoding='utf-8') as csvfile:
+            reader = csv.DictReader(csvfile)  
+            for row in reader:
+                slangwords[row['slang']] = row['formal']
+    except FileNotFoundError:
+        print("CSV file not found! Please make sure 'colloquial-indonesian-lexicon.csv' is in the project folder.")
 
 def extract_features1(text):
     dum = {}
