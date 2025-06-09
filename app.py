@@ -28,5 +28,3 @@ async def shutdown():
 @app.post("/predict_comments/")
 async def predict_comments(video_id: str, background_tasks: BackgroundTasks):
     return await get_comments_and_process(video_id, background_tasks)
-
-run_ngrok(app)
