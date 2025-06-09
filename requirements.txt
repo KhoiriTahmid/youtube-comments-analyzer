@@ -7,7 +7,7 @@ nltk==3.9.1
 pandas==2.3.0
 python-dotenv==1.1.0
 SQLAlchemy==2.0.41
-tensorflow==2.19
+tensorflow==2.19.0
 uvicorn==0.34.3
 youtube_comment_downloader==0.1.76
 fastapi==0.115.12
