@@ -13,3 +13,4 @@ youtube_comment_downloader==0.1.76
 fastapi==0.115.12
 regex==2024.11.6
 python-Levenshtein==0.27.1
+asyncpg==0.30.0
