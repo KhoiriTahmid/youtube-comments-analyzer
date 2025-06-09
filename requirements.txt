@@ -7,9 +7,9 @@ nltk==3.9.1
 pandas==2.3.0
 python-dotenv==1.1.0
 SQLAlchemy==2.0.41
-tensorflow
+tensorflow==2.18.0
 uvicorn==0.34.3
 youtube_comment_downloader==0.1.76
-fastapi
-regex
-python-Levenshtein
+fastapi==0.115.12
+regex==2024.11.6
+python-Levenshtein==0.27.1
