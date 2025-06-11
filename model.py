@@ -13,5 +13,6 @@ comment = Table(
     Column("author", String(100)),
     Column("is_judol", Boolean, nullable=True, default=None),
     Column("is_spam", Boolean, nullable=False, server_default=expression.false()),
-    Column("sentimen", Integer, nullable=True, default=None) 
+    Column("sentimen", Integer, nullable=True, default=None),
+    Column("is_delete", Boolean, nullable=False, server_default=expression.true()),
 )
