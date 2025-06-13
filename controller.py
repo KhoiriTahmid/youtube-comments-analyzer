@@ -8,7 +8,7 @@ from preprocess import preprocess_text
 
 async def get_comments_and_process(video_id: str, background_tasks: BackgroundTasks):
     try:
-        
+        print("run a request")
         output_data = get_comments(video_id)
         
         # Start background job for all predictions
