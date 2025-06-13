@@ -11,21 +11,8 @@ async def get_comments_and_process(video_id: str, background_tasks: BackgroundTa
         
         output_data = get_comments(video_id)
         
-        comments=[]
-        cids=[]
-        spamDict = defaultdict(list)
-
-        for row in output_data:
-            comments.append(row['text'])
-            cids.append(row['cid'])
-            spamDict[row['author']].append({"cid":row["cid"], "text":row["text"]})
-
-        processed_texts, feature_list = preprocess_text(comments)
-
-        # add bg task biar dijalanin di bg
-        background_tasks.add_task(predict_judol_comments, cids, processed_texts, feature_list)
-        background_tasks.add_task(predict_spam_comments, spamDict)
-        background_tasks.add_task(predict_sentimen_comments, cids, processed_texts)
+        # Start background job for all predictions
+        background_tasks.add_task(process_predictions_in_bg, output_data)
 
         # run dan tunggu ampe kelar
         await add_comments_bulk(output_data)
@@ -34,8 +21,28 @@ async def get_comments_and_process(video_id: str, background_tasks: BackgroundTa
         if isinstance(output_data, dict) and 'error' in output_data:
             raise HTTPException(status_code=500, detail=f"error: {output_data['error']}")
 
+        print("first push to DB")
         return {"success":True}
 
     except Exception as e:
         # Untuk error lainnya
         raise HTTPException(status_code=500, detail=f"Terjadi kesalahan internal: {str(e)}")
+
+
+async def process_predictions_in_bg(output_data: list):
+
+    comments = []
+    cids = []
+    spamDict = defaultdict(list)
+
+    for row in output_data:
+        comments.append(row['text'])
+        cids.append(row['cid'])
+        spamDict[row['author']].append({"cid": row["cid"], "text": row["text"]})
+
+    processed_texts, feature_list = preprocess_text(comments)
+
+    await predict_judol_comments(cids, processed_texts, feature_list)
+    await predict_spam_comments(spamDict)
+    await predict_sentimen_comments(cids, processed_texts)
+    print("last push to DB")
