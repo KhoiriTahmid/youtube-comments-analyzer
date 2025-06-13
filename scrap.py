@@ -9,7 +9,6 @@ def get_comments(video_id:str):
         comment_generator = downloader.get_comments(youtube_id=video_id)
 
         for comment in itertools.islice(comment_generator, max_results):
-            # You can append the whole comment object or just specific parts
             data.append({
                 'cid': comment.get('cid'),
                 'video_id':video_id,
