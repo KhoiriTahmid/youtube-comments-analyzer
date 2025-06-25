@@ -1,17 +1,19 @@
-# Use official Python image
 FROM python:3.11-slim
 
 # Set working directory
 WORKDIR /app
 
-# Copy code
+# Install git terlebih dahulu
+RUN apt update && apt install -y git && rm -rf /var/lib/apt/lists/*
+
+# Copy semua file ke image
 COPY . .
 
-# Install dependencies
+# Install dependensi
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose port
+# Expose port FastAPI
 EXPOSE 8000
 
-# Run FastAPI using uvicorn
+# Jalankan server
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
