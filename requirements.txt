@@ -24,12 +24,6 @@ fastapi==0.115.12
 fastjsonschema==2.21.1
 flatbuffers==25.2.10
 gast==0.6.0
-google-api-core==2.24.2
-google-api-python-client==2.170.0
-google-auth==2.40.2
-google-auth-httplib2==0.2.0
-google-pasta==0.2.0
-googleapis-common-protos==1.70.0
 greenlet==3.2.3
 grpcio==1.72.1
 gTTS==2.5.4
